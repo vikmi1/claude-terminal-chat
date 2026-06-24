@@ -1,0 +1,39 @@
+# Переменные окружения — API-ключи никогда не коммитить
+.env
+
+# История диалога — персональные данные пользователя
+chat_history.json
+
+# Виртуальное окружение Python
+.venv/
+venv/
+env/
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Изображения в папке проекта
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.png
+*.PNG
+*.gif
+*.bmp
+*.webp
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
