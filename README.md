@@ -1,86 +1,89 @@
-# AI Console — Терминальный чат с Claude
+**English** · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
-Терминальный чат-ассистент на базе Anthropic Claude с поддержкой режима рассуждений (Thinking), потоковым выводом и сохранением истории диалога между сессиями.
+# AI Console — Terminal Chat with Claude
 
-## Как это выглядит
+A terminal chat assistant powered by Anthropic Claude, with a reasoning mode (Thinking), streaming output and conversation history that persists between sessions.
 
-![Сессия в терминале: выбор режима и модели, вопрос и ответ с Markdown-разметкой](screenshots/chat.png)
+## What it looks like
 
----
+![Terminal session: choosing a mode and a model, a question and an answer with Markdown formatting](screenshots/chat.png)
 
----
-
-## Возможности
-
-- **Три режима работы** — Thinking, Обычный, Прямая трансляция
-- **Выбор модели** — список актуальных моделей загружается из API при каждом запуске
-- **Память контекста** — вся история передаётся в каждом запросе, модель помнит весь разговор
-- **Персистентная история** — диалог сохраняется в `chat_history.json` и загружается при следующем запуске
-- **Красивый вывод** — панели Rich с цветовым кодированием и рендерингом Markdown в ответах
-- **Команды управления** — `mode`, `clear`, `help`, `exit`
+The interface of the app is in Russian.
 
 ---
 
-## Режимы работы
+## Features
 
-| # | Режим | Описание |
+- **Three modes** — Thinking, Standard, Live stream
+- **Model selection** — the list of current models is loaded from the API on every start
+- **Context memory** — the whole history is sent with every request, so the model remembers the entire conversation
+- **Persistent history** — the conversation is saved to `chat_history.json` and loaded on the next start
+- **Rich output** — Rich panels with color coding and Markdown rendering in answers
+- **Control commands** — `mode`, `clear`, `help`, `exit`
+
+---
+
+## Modes
+
+| # | Mode | Description |
 |---|-------|----------|
-| 1 | **Thinking** | Модель размышляет перед ответом. Блок размышлений показывается **после** завершения генерации |
-| 2 | **Обычный** | Ответ без внутренних размышлений. Быстрее и дешевле |
-| 3 | **Прямая трансляция** | Размышления модели отображаются **в реальном времени** по мере генерации |
+| 1 | **Thinking** | The model reasons before answering. The reasoning block is shown **after** generation is finished |
+| 2 | **Standard** | Answer without internal reasoning. Faster and cheaper |
+| 3 | **Live stream** | The model's reasoning is shown **in real time** as it is generated |
 
 ---
 
-## Команды в чате
+## Chat commands
 
-| Команда      | Действие |
+| Command      | Action |
 |--------------|----------|
-| `exit`       | Сохранить историю и завершить программу |
-| `clear`      | Очистить историю диалога (удаляет `chat_history.json`) |
-| `mode`       | Открыть меню смены режима и модели без перезапуска |
-| `help`       | Показать список доступных команд |
-| `summarize`  | сжать историю через суммаризацию  |
+| `exit`       | Save the history and quit |
+| `clear`      | Clear the conversation history (deletes `chat_history.json`) |
+| `mode`       | Open the menu to change mode and model without restarting |
+| `help`       | Show the list of available commands |
+| `summarize`  | Compress the history by summarizing it |
 
 ---
 
-## Установка и запуск
+## Installation and running
 
-### 1. Предварительные требования
+### 1. Prerequisites
 
 - Python 3.10+
-- Ключ API от [Anthropic Console](https://console.anthropic.com/)
+- An API key from the [Anthropic Console](https://console.anthropic.com/)
 
-### 2. Клонировать или скачать проект
+### 2. Clone the project
 
+```bash
+git clone https://github.com/vikmi1/claude-terminal-chat.git
+cd claude-terminal-chat
 ```
-git clone <url> или скачать архив
-```
 
-### 3. Создать виртуальное окружение (рекомендуется)
+### 3. Create a virtual environment (recommended)
 
 ```bash
 python -m venv .venv
 ```
 
-Активировать:
+Activate it:
 - Windows: `.venv\Scripts\activate`
 - macOS/Linux: `source .venv/bin/activate`
 
-### 4. Установить зависимости
+### 4. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 5. Добавить API-ключ
+### 5. Add your API key
 
-Создать файл `.env` в папке проекта:
+Create a `.env` file in the project folder:
 
 ```
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
-### 6. Запустить
+### 6. Run
 
 ```bash
 python main.py
@@ -88,47 +91,46 @@ python main.py
 
 ---
 
-## Структура проекта
+## Project structure
 
 ```
-├── main.py           # Точка входа, меню, основной цикл диалога
-├── chat.py           # API-клиент, функции generate_response и stream_response
-├── display.py        # Визуальное оформление через Rich
-├── history.py        # Сохранение и загрузка истории (JSON)
-├── requirements.txt  # Зависимости Python
-├── .env              # API-ключ (не коммитить в git)
-└── chat_history.json # Создаётся автоматически при первом сообщении
+├── main.py           # Entry point, menus, main conversation loop
+├── chat.py           # API client, generate_response and stream_response
+├── display.py        # Visual layout with Rich
+├── history.py        # Saving and loading the history (JSON)
+├── requirements.txt  # Python dependencies
+├── .env              # API key (do not commit to git)
+└── chat_history.json # Created automatically with the first message
 ```
 
 ---
 
-## Зависимости
+## Dependencies
 
-| Пакет | Назначение |
+| Package | Purpose |
 |-------|-----------|
-| `anthropic` | Официальный Python SDK для Claude API |
-| `python-dotenv` | Загрузка переменных окружения из `.env` |
-| `rich` | Красивый вывод в терминале: панели, Markdown, спиннеры |
+| `anthropic` | Official Python SDK for the Claude API |
+| `python-dotenv` | Loads environment variables from `.env` |
+| `rich` | Nice terminal output: panels, Markdown, spinners |
 
 ---
 
-## Модели
+## Models
 
-При запуске список моделей загружается из API — показываются все модели, доступные на вашем аккаунте. Модели с пометкой **thinking** поддерживают режимы 1 и 3.
+On start, the list of models is loaded from the API — all models available on your account are shown. Models marked **thinking** support modes 1 and 3.
 
-Текущие модели Anthropic (на момент написания):
+Anthropic models at the time of writing:
 
-| Модель | ID | Thinking |
+| Model | ID | Thinking |
 |--------|----|:--------:|
-
 | Claude Opus 4.8 | `claude-opus-4-8` | ✓ |
 | Claude Sonnet 4.6 | `claude-sonnet-4-6` | ✓ |
 | Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | — |
 
 ---
 
-## Примечания
+## Notes
 
-- `MAX_TOKENS = 2000` для обычного режима, `MAX_TOKENS_THINKING = 16000` для режимов с размышлениями — настраивается в `chat.py`
-- История хранится в формате JSON со всеми блоками контента, включая thinking-блоки, которые передаются обратно в API для корректного многоходового диалога
-- При смене модели командой `mode` текущая история сохраняется и продолжается с новой моделью
+- `MAX_TOKENS = 2000` for the standard mode and `MAX_TOKENS_THINKING = 16000` for the reasoning modes — configurable in `chat.py`
+- The history is stored as JSON with all content blocks, including thinking blocks, which are sent back to the API so multi-turn conversations work correctly
+- When you switch the model with `mode`, the current history is kept and the conversation continues with the new model
